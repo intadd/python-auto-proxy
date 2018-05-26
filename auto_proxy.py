@@ -21,20 +21,25 @@ def proxy_server():
 	
 
 	# all_proxy array has 200 proxy server information
-	return all_proxy[random.randrange(0,20)]
+	return all_proxy
 
 
+def main():
 
-def main():	
+
+	all_proxy=proxy_server()	
+
 	proxies={
-		'http':proxy_server()
+		'http':all_proxy[random.randrange(0,20)]
+       		}
+	try:
+		res=requests.get('http://intaddpy.com',proxies=proxies)
+		print (res.status_code)
 
-	}
+	except:
+		print (proxies)
 
-	res=requests.get('http://intaddpy.com',proxies=proxies)
 
-
-	print (res.text)
 
 
 if(__name__=='__main__'):
